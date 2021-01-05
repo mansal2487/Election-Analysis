@@ -56,11 +56,44 @@ with open(file_to_load, 'r') as electon_data:
             f"-------------------------\n"
             f"Total Votes: {total_votes:,}\n"
             f"-------------------------\n"
-            f"\n"
             )
         print(election_results)
         # Save the final vote count to the text file.
         txt_file.write(election_results)
+
+
+
+
+        print("County Votes:")
+        txt_file.write("\nCounty Votes:\n")
+
+        for county in counties:
+
+            votes = county_votes[county]
+
+            vote_percentage = float(votes) / float(total_votes) * 100
+
+            county_results = (f"{county}: {vote_percentage:.1f}% ({votes:,})")
+
+            print(county_results)
+            txt_file.write(f"{county_results}\n")
+
+            if votes > winning_county_count:
+
+                winning_county_count = votes
+
+                winning_county = county
+
+
+        winning_county_summary = (
+            f"\n-------------------------\n"
+            f"Largest County Turnout: {winning_county}\n"
+            f"-------------------------\n"
+        )
+
+        print(winning_county_summary)
+        txt_file.write(winning_county_summary)
+
 
 
         for candidate in candidates:
@@ -85,41 +118,14 @@ with open(file_to_load, 'r') as electon_data:
 
 
         winning_candidate_summary = (
-            f"----------------------------\n"
-            f"Winning Candidate: {winning_candidate}\n"
+            f"-------------------------\n"
+            f"Winner: {winning_candidate}\n"
             f"Winning Vote Count: {winning_candidate_count:,}\n"
             f"Winning Percentage: {winning_candidate_percentage:.1f}%\n"
-            f"----------------------------\n"
+            f"-------------------------"
         )
 
         print(winning_candidate_summary)
         txt_file.write(winning_candidate_summary)
 
-        txt_file.write("\nCounty Votes:\n")
-
-        for county in counties:
-
-            votes = county_votes[county]
-
-            vote_percentage = float(votes) / float(total_votes) * 100
-
-            county_results = (f"{county}: {vote_percentage:.1f}% ({votes:,})\n")
-
-            print(county_results)
-            txt_file.write(county_results)
-
-
-            if votes > winning_county_count:
-
-                winning_county_count = votes
-
-                winning_county = county
-
-
-        winning_county_summary = (
-            f"\n----------------------------\n"
-            f"Largest County Turnout: {winning_county}\n"
-        )
-
-        print(winning_county_summary)
-        txt_file.write(winning_county_summary)
+        
