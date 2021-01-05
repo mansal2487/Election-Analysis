@@ -1,1 +1,13 @@
-# Election-Analysis
+# Election Analysis
+
+## Overview of Election Audit
+The purpose of this audit is to provide Seth and Tom with the information they need to determine whether or not the votes cast were accurately counted and/or whether proper procedures were followed. A way they might use the data is to see if the total number of legally registered voters is greater than or equal to the total number of votes cast. Even if this is the case, they might dive deeper by comparing this elections voter turnout to historical numbers.
+
+## Election-Audit Results
+### By County
+The total number of votes cast in this congressional election is 369,711. Further, Jefferson county had 38,855 (10.5%) people vote, Denver county had 306,055 (82.8%) people vote, and Arapahoe county had 24,801 (6.7%) people vote. Denver county by far had largest number of votes which, at least on the surface, makes sense since Denver county is easily the most populated of the three counties.
+### By Candidate
+As for the candidates, Charles Stockham received 85,213 (23.0%) votes, Diana DeGette received 272,892 (73.8%) votes, and Raymon Doane received 11,606 (3.1%) votes. This is the 7th time that Diana has been elected for this position. Even with Colorado being a historically democratic state Diana identifying as a member of the Democratic Party, this is quite the run. Colorado is not overwhelmingly Democratic though. I'm curious to see how these three counties alone tend to vote. I would guess that they are overwhelmingly Democratic as this race wasn't even close.
+
+## Election-Audit Summary
+In order to see how the script I wrote can be used for any election, we need to first look at the data source. If it is not a CSV file, we will either need to convert it to one or modify the script to read a different type of file. I believe the general structure of the file will include headers labled something like 'voter id', 'county', and 'candidate'. Regardless of whether or not this script is used for another election, we should add code that looks for duplicate voter ids by looping through the data and adding all unique voter id to a dictionary as the keys and their number of occurences as the values. If any id appears twice, we should figure out how this should be remedied. Now, what if the data includes votes for two races such as the senate and presidential elections? This is a simple fix. If there is a column designated for each races' candidates then all we have to do is add code that will loop through and count this second races' voters and candidates and store the results in a dictionary, just like we did for this congressional election. However, for both races, we should make sure that we use a comparison such as 'if voter id != "" and candidate != ""' when counting the total votes for the respective race to make sure we get the correct vote total as just because someone voted in one race doesn't mean they voted in the other. 
